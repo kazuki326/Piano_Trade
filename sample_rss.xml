@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+<channel>
+<title>Example Feed</title>
+<link>http://example.com/</link>
+<description>Sample RSS</description>
+<item>
+<title>Article One</title>
+<link>http://example.com/one</link>
+<pubDate>Tue, 01 Jan 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+<title>Article Two</title>
+<link>http://example.com/two</link>
+<pubDate>Tue, 02 Jan 2024 00:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>
