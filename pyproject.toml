@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "news-stock-pipeline"
+version = "0.1.0"
+description = "RSS scraping pipeline to gather and analyze news for stock selection."
+authors = []
+
+[tool.poetry.dependencies]
+python = "^3.11"
+feedparser = "*"
+requests = "*"
+beautifulsoup4 = "*"
+readability-lxml = "*"
+pandas = "*"
+playwright = "*"
+pydantic = "*"
+PyYAML = "*"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+pytest-cov = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

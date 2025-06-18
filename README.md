@@ -1,23 +1,44 @@
-# Piano_Trade
 
-This repository contains a prototype script that fetches recent business news via RSS feeds and attempts to pick related Japanese stocks. The script downloads the feeds, extracts simple keywords from article titles and descriptions, and maps those keywords to stock tickers using a small sample dictionary.
+# ニュース株選定パイプライン
 
-## Requirements
+このリポジトリはRSSニュースを収集し、関連するWebページから本文を取得するPython 3.11向けツールです。取得データはSQLiteに保存されます。
 
-The script relies only on the Python standard library (Python 3.8+). No external packages are needed.
+## セットアップ
 
-## Usage
+1. Poetryをインストール後、依存パッケージを取得します。
+   ```bash
+   make install
+   ```
+2. Playwright用のブラウザバイナリをダウンロードします。
+   ```bash
+   make playwright-init
+   ```
 
-Run the following command to execute the scraper and print the detected tickers:
+## 使い方
 
+### RSS記事の収集
+
+`feeds.yaml` にRSSフィードのURLとsource名を記載したら以下を実行します。
 ```bash
-python3 main.py
+python src/collector/fetch_rss.py
+```
+`data/raw_articles.db` に記事URLやタイトルが保存されます。
+
+### HTML本文の取得
+
+RSS取得後、保存されたURLから本文を取得します。
+```bash
+python -m collector.fetch_html
+```
+`data/html_articles.db` に本文テキストと著者情報が追記されます。
+
+## テスト
+
+ユニットテストはpytestで実行できます。
+```bash
+poetry run pytest
 ```
 
-## Testing
+## 定期実行
 
-Unit tests can be executed with:
-
-```bash
-python3 -m unittest discover -s tests
-```
+`.github/workflows/daily.yml` により、毎日00:05 JSTに上記スクリプトが自動実行され、生成されたDBはGitHub Actionsのアーティファクトとして保存されます。
